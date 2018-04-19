@@ -8,7 +8,7 @@ generate_data = function(n, p){
   responses = rnorm(n = n)
   return(list(covariates = covariates,
               responses = responses)
-  )
+        )
 }
 
 model_select = function(covariates, responses, cutoff){
@@ -29,15 +29,31 @@ run_simulation = function(n_trials = 10, n, p, cutoff){
     result = cbind(result, 
                    model_select(covariates = data[[1]], responses = data[[2]], cutoff = cutoff))
   }
-  hist(as.numeric(result), breaks = 50)
+  write.csv(x = result, file = "sim.results.csv")
 }
 
+make_plot = function(datapath){
+  # browser()
+  result = as.matrix(read.csv(file = datapath, header = T))
+  hist(result[, -1], breaks = 10)
+}
+
+par(mfrow = c(3,3), mar = c(0.5,1, 3.5,1))
 run_simulation(n = 100, p = 10, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 1000, p = 10, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 10000, p = 10, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 100, p = 20, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 1000, p = 20, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 10000, p = 20, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 100, p = 50, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 1000, p = 50, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
 run_simulation(n = 10000, p = 50, cutoff = 0.05)
+make_plot("/Users/JulianNelson/Documents/Carnegie Mellon/Spring 2018/StatComp/Labs/lab_12/sim.results.csv")
